@@ -2,7 +2,7 @@
   "lockfileVersion": 1,
   "workspaces": {
     "": {
-      "name": "querycraft",
+      "name": "querynex",
       "dependencies": {
         "@hookform/resolvers": "^5.2.2",
         "@neondatabase/serverless": "^1.0.2",

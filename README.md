@@ -1,4 +1,4 @@
-# 😎 QueryCraft
+# 😎 QueryNex
 
 ### _Query smarter. Connect faster. Explore data effortlessly._
 
