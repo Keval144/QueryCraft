@@ -7,6 +7,7 @@ const nextConfig: NextConfig = {
     turbopackFileSystemCacheForDev: true, 
     authInterrupts: true, 
   },
+  
 } satisfies NextConfig;
 
 export default nextConfig;
