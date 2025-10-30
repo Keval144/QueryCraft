@@ -28,4 +28,4 @@ export function ThemeSwitch({ className }: ThemeSwitchProps) {
       <span className="sr-only">Toggle theme</span>
     </Button>
   );
-}w
+}
