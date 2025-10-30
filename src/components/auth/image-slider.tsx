@@ -18,7 +18,7 @@ export interface CarouselProps {
 const ImageSlider: React.FC<CarouselProps> = ({
   slides,
   autoSlide = false,
-  autoSlideInterval = 7000,
+  autoSlideInterval = 8000,
 }) => {
   const [current, setCurrent] = useState(0);
 

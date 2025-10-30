@@ -30,6 +30,8 @@ import { toast } from "sonner";
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 
+import QueryNex from "@/components/common/querynex";
+
 function SignUpForm() {
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
@@ -96,7 +98,12 @@ function SignUpForm() {
     <div>
       <Card className="w-full max-w-md">
         <CardHeader>
-          <CardTitle className="text-lg md:text-xl">Sign Up</CardTitle>
+          <Link href={"/"}>
+            <CardTitle>
+              <QueryNex className="text-2xl" />
+            </CardTitle>
+          </Link>
+          <CardTitle className="text-xl">Sign Up</CardTitle>
           <CardDescription className="text-xs md:text-sm">
             Enter your information to create an account
           </CardDescription>

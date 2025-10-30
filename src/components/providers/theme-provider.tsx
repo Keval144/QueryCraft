@@ -7,9 +7,5 @@ export function ThemeProvider({
   children,
   ...props
 }: React.ComponentProps<typeof NextThemesProvider>) {
-  return (
-    <React.Suspense fallback={<div>Loading theme...</div>}>
-      <NextThemesProvider {...props}>{children}</NextThemesProvider>;
-    </React.Suspense>
-  );
+  return <NextThemesProvider {...props}>{children}</NextThemesProvider>;
 }

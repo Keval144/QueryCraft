@@ -35,6 +35,7 @@ import { authClient } from "@/lib/auth-client";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { CheckRole } from "@/lib/check-role";
+import QueryNex from "@/components/common/querynex";
 
 function SignInForm() {
   const [error, setError] = useState<string | null>(null);
@@ -112,7 +113,12 @@ function SignInForm() {
   return (
     <Card className="w-full max-w-md">
       <CardHeader>
-        <CardTitle className="text-lg md:text-xl">Sign In</CardTitle>
+        <CardTitle>
+          <Link href={"/"}>
+            <QueryNex className="text-2xl" />
+          </Link>
+        </CardTitle>
+        <CardTitle className="text-xl">Sign In</CardTitle>
         <CardDescription className="text-xs md:text-sm">
           Enter your email below to login to your account
         </CardDescription>

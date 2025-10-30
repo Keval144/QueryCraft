@@ -1,10 +1,10 @@
-# 😎 QueryNex
+# 😎 QueryNex_
 
 ### _Query smarter. Connect faster. Explore data effortlessly._
 
 ## 🚀 Overview
 
-**QueryCraft** is an intelligent SQL playground that lets users securely connect their own databases and query them through a sleek, ChatGPT-style interface.  
+**QueryNex_** is an intelligent SQL playground that lets users securely connect their own databases and query them through a sleek, ChatGPT-style interface.  
 It’s built for developers, analysts, and data engineers who want instant insights — without writing backend code and people who doesnt know sql.
 
 ---

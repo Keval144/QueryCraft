@@ -4,15 +4,19 @@ import type { Metadata } from "next";
 
 import ImageSlider, { type Slide } from "@/components/auth/image-slider";
 
+import final1 from "@/../public/carousel/1final.jpg";
+import final2 from "@/../public/carousel/2final.jpg";
+import final3 from "@/../public/carousel/3final.jpg";
+
 export const metadata: Metadata = {
   title: "Auth Pages",
   description: "Authentication Pages of My App",
 };
 
 const slides: Slide[] = [
-  //   { src: "https://picsum.photos/800/600?random=1", alt: "Slide 1" },
-  //   { src: "https://picsum.photos/800/600?random=2", alt: "Slide 2" },
-  //   { src: "https://picsum.photos/800/600?random=3", alt: "Slide 3" },
+  { src: final1, alt: "Analyst Working on his project" },
+  { src: final2, alt: "Minimalist Programmer Setup" },
+  { src: final3, alt: "Ai Abstract Art" },
 ];
 
 export default function AuthLayout({
