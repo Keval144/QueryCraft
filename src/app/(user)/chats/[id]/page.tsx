@@ -1,7 +1,8 @@
-import React from "react";
-
-function page() {
-  return <div>page</div>;
+interface PageProps {
+  params: Promise<{ id: string }>;
 }
 
-export default page;
+export default async function ChatPage({ params }: PageProps) {
+  const { id } = await params;
+  return <div>Chat ID: {id}</div>;
+}

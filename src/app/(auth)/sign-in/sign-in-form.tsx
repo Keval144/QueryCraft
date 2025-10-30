@@ -34,6 +34,7 @@ import { IconBrandGoogleFilled as GoogleIcon } from "@tabler/icons-react";
 import { authClient } from "@/lib/auth-client";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { CheckRole } from "@/lib/check-role";
 
 function SignInForm() {
   const [error, setError] = useState<string | null>(null);
@@ -63,12 +64,29 @@ function SignInForm() {
         email,
         password,
         rememberMe,
-        callbackURL: "/dashboard",
       },
       {
-        onSuccess: () => {
-          toast.success("Account Signed In Successfully");
-          router.push("/dashboard");
+        onSuccess: async () => {
+          try {
+            const role = await CheckRole();
+
+            if (!role) {
+              toast.error("User role not found!");
+              return router.push("/sign-in");
+            }
+            if (role === "admin") {
+              toast.success("Welcome back, Admin!");
+              router.push("/dashboard");
+            } else if (role === "user") {
+              toast.success("Welcome back!");
+              router.push("/chats");
+            } else {
+              router.push("/");
+            }
+          } catch (err) {
+            console.error("Error fetching session:", err);
+            toast.error("Something went wrong while checking role.");
+          }
         },
         onError: (ctx) => {
           setError(ctx.error.message || "Something went wrong");
@@ -203,7 +221,7 @@ function SignInForm() {
         <div className="flex w-full justify-center border-t pt-4">
           <p className="text-muted-foreground text-center text-xs">
             Don&apos;t have an account?{" "}
-            <Link href="/sign-up" className="underline">
+            <Link href="/sign-up" className="underline text-primary">
               Sign up
             </Link>
           </p>

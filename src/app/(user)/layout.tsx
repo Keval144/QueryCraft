@@ -1,5 +1,6 @@
-function layout() {
-  return <div>layout</div>;
+
+async function ChatLayout({ children }: { children: React.ReactNode }) {
+  return <>{children}</>;
 }
 
-export default layout;
+export default ChatLayout;
