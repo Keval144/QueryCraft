@@ -1,12 +1,11 @@
 //app/(auth)/layout.tsx
-import { cn } from "@/lib/utils";
+
 import type { Metadata } from "next";
-
-import ImageSlider, { type Slide } from "@/components/auth/image-slider";
-
 import final1 from "@/../public/carousel/1final.jpg";
 import final2 from "@/../public/carousel/2final.jpg";
 import final3 from "@/../public/carousel/3final.jpg";
+import ImageSlider, { type Slide } from "@/components/auth/image-slider";
+import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Auth Pages",
@@ -35,7 +34,7 @@ export default function AuthLayout({
       <div className="flex w-full items-center justify-center p-6 lg:w-1/3">
         <div
           className={cn(
-            "bg-background flex w-full max-w-md flex-col rounded-xl p-6"
+            "bg-background flex w-full max-w-md flex-col rounded-xl p-6",
           )}
         >
           {children}

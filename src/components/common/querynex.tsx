@@ -1,5 +1,5 @@
-import Logo from "./logo";
 import { Roboto } from "next/font/google";
+import Logo from "./logo";
 
 interface QueryNexProps {
   className?: string;
@@ -14,10 +14,10 @@ const roboto = Roboto({
 function QueryNex({ className }: QueryNexProps) {
   return (
     <div
-      className={`flex items-center  text-primary ${roboto.variable} ${className}`}
+      className={`text-primary flex items-center ${roboto.variable} ${className}`}
     >
-      <Logo className="w-[1.5em] h-[1.5em] fill-current" />
-      <span className="text-black dark:text-white font-(--font-roboto)">
+      <Logo className="h-[1.5em] w-[1.5em] fill-current" />
+      <span className="font-(--font-roboto) text-black dark:text-white">
         ueryNex
       </span>
       <span className="text-primary font-(--font-roboto)">_</span>

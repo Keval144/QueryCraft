@@ -7,7 +7,7 @@ import {
   IconNotification,
   IconUserCircle,
 } from "@tabler/icons-react";
-
+import { useRouter } from "next/navigation";
 import {
   Avatar,
   AvatarFallback,
@@ -29,7 +29,6 @@ import {
   useSidebar,
 } from "@/components/shadcn-ui/sidebar";
 import { authClient } from "@/lib/auth-client";
-import { useRouter } from "next/navigation";
 
 export function NavUser({
   user,

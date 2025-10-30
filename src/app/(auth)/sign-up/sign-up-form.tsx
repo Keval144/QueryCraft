@@ -2,11 +2,16 @@
 
 "use client";
 
-import { passwordSchema } from "@/lib/validation";
+import { zodResolver } from "@hookform/resolvers/zod";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import { toast } from "sonner";
 import z from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { LoadingButton } from "@/components/auth/loading-button";
+import { PasswordInput } from "@/components/auth/password-input";
+import QueryNex from "@/components/common/querynex";
 import {
   Card,
   CardContent,
@@ -23,14 +28,8 @@ import {
   FormMessage,
 } from "@/components/shadcn-ui/form";
 import { Input } from "@/components/shadcn-ui/input";
-import { PasswordInput } from "@/components/auth/password-input";
-import { LoadingButton } from "@/components/auth/loading-button";
-import Link from "next/link";
-import { toast } from "sonner";
 import { authClient } from "@/lib/auth-client";
-import { useRouter } from "next/navigation";
-
-import QueryNex from "@/components/common/querynex";
+import { passwordSchema } from "@/lib/validation";
 
 function SignUpForm() {
   const [error, setError] = useState<string | null>(null);
@@ -86,7 +85,7 @@ function SignUpForm() {
             toast.error("Oops! Something went wrong!");
           }
         },
-      }
+      },
     );
 
     form.reset();
@@ -196,7 +195,7 @@ function SignUpForm() {
           <div className="flex w-full justify-center border-t pt-4">
             <p className="text-muted-foreground text-center text-xs">
               Already have an account?{" "}
-              <Link href="/sign-in" className="underline text-primary">
+              <Link href="/sign-in" className="text-primary underline">
                 Sign in
               </Link>
             </p>

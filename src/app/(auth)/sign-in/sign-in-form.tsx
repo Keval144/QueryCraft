@@ -2,6 +2,18 @@
 
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
+import { IconBrandGoogleFilled as GoogleIcon } from "@tabler/icons-react";
+import { GithubIcon } from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { FormProvider, useForm } from "react-hook-form";
+import { toast } from "sonner";
+import z from "zod";
+import { LoadingButton } from "@/components/auth/loading-button";
+import { PasswordInput } from "@/components/auth/password-input";
+import QueryNex from "@/components/common/querynex";
 import { Button } from "@/components/shadcn-ui/button";
 import {
   Card,
@@ -11,7 +23,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/shadcn-ui/card";
-
 import { Checkbox } from "@/components/shadcn-ui/checkbox";
 import {
   FormControl,
@@ -21,21 +32,8 @@ import {
   FormMessage,
 } from "@/components/shadcn-ui/form";
 import { Input } from "@/components/shadcn-ui/input";
-import { LoadingButton } from "@/components/auth/loading-button";
-import { PasswordInput } from "@/components/auth/password-input";
-import { zodResolver } from "@hookform/resolvers/zod";
-import Link from "next/link";
-import { useState } from "react";
-import { FormProvider, useForm } from "react-hook-form";
-import z from "zod";
-
-import { GithubIcon } from "lucide-react";
-import { IconBrandGoogleFilled as GoogleIcon } from "@tabler/icons-react";
 import { authClient } from "@/lib/auth-client";
-import { toast } from "sonner";
-import { useRouter } from "next/navigation";
 import { CheckRole } from "@/lib/check-role";
-import QueryNex from "@/components/common/querynex";
 
 function SignInForm() {
   const [error, setError] = useState<string | null>(null);
@@ -95,7 +93,7 @@ function SignInForm() {
             toast.error("Oops! Something went wrong!");
           }
         },
-      }
+      },
     );
   }
 
@@ -181,12 +179,6 @@ function SignInForm() {
               )}
             />
 
-            <Link
-              href="/forgot-password"
-              className="text-muted-foreground ml-auto inline-block text-xs underline"
-            >
-              Forgot your password?
-            </Link>
             {error && (
               <div role="alert" className="text-sm text-red-600">
                 {error}
@@ -227,7 +219,7 @@ function SignInForm() {
         <div className="flex w-full justify-center border-t pt-4">
           <p className="text-muted-foreground text-center text-xs">
             Don&apos;t have an account?{" "}
-            <Link href="/sign-up" className="underline text-primary">
+            <Link href="/sign-up" className="text-primary underline">
               Sign up
             </Link>
           </p>

@@ -2,8 +2,6 @@
 
 import * as React from "react";
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
-
-import { useIsMobile } from "@/hooks/use-mobile";
 import {
   Card,
   CardAction,
@@ -13,7 +11,7 @@ import {
   CardTitle,
 } from "@/components/shadcn-ui/card";
 import {
-  ChartConfig,
+  type ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
@@ -29,6 +27,7 @@ import {
   ToggleGroup,
   ToggleGroupItem,
 } from "@/components/shadcn-ui/toggle-group";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export const description = "An interactive area chart";
 

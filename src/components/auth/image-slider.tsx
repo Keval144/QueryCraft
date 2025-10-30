@@ -25,7 +25,7 @@ const ImageSlider: React.FC<CarouselProps> = ({
   const _prev = () => setCurrent((c) => (c === 0 ? slides.length - 1 : c - 1));
   const next = useCallback(
     () => setCurrent((c) => (c === slides.length - 1 ? 0 : c + 1)),
-    [slides.length]
+    [slides.length],
   );
 
   useEffect(() => {
