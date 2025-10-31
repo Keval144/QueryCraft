@@ -1,14 +1,19 @@
-import { Relation } from "drizzle-orm";
+import { relations } from "drizzle-orm";
 import {
   boolean,
   integer,
+  pgEnum,
   pgTable,
   serial,
   text,
   timestamp,
+  uuid,
   varchar,
+  doublePrecision,
+  index,
 } from "drizzle-orm/pg-core";
 
+// ---------- USER / AUTH ----------
 export const user = pgTable("user", {
   id: text("id").primaryKey(),
   name: text("name").notNull(),
@@ -18,7 +23,7 @@ export const user = pgTable("user", {
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at")
     .defaultNow()
-    .$onUpdate(() => /* @__PURE__ */ new Date())
+    .$onUpdate(() => new Date())
     .notNull(),
   role: text("role").default("user").notNull(),
   banned: boolean("banned").default(false),
@@ -32,7 +37,7 @@ export const session = pgTable("session", {
   token: text("token").notNull().unique(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at")
-    .$onUpdate(() => /* @__PURE__ */ new Date())
+    .$onUpdate(() => new Date())
     .notNull(),
   ipAddress: text("ip_address"),
   userAgent: text("user_agent"),
@@ -58,7 +63,7 @@ export const account = pgTable("account", {
   password: text("password"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at")
-    .$onUpdate(() => /* @__PURE__ */ new Date())
+    .$onUpdate(() => new Date())
     .notNull(),
 });
 
@@ -70,8 +75,73 @@ export const verification = pgTable("verification", {
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at")
     .defaultNow()
-    .$onUpdate(() => /* @__PURE__ */ new Date())
+    .$onUpdate(() => new Date())
     .notNull(),
 });
 
-export const schema = { user, session, account, verification };
+// ---------- CHAT ----------
+export const dbTypeEnum = pgEnum("database_type", [
+  "mysql",
+  "postgres",
+  "mongodb",
+]);
+
+export const chat = pgTable(
+  "chat",
+  {
+    id: uuid("id").defaultRandom().primaryKey(),
+    userId: text("user_id")
+      .notNull()
+      .references(() => user.id, { onDelete: "cascade" }),
+    title: text("title").default("New Chat"),
+    dataString: text("data_string"),
+    database: dbTypeEnum("database"),
+    safemode: boolean().default(false),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+    updatedAt: timestamp("updated_at")
+      .defaultNow()
+      .$onUpdate(() => new Date())
+      .notNull(),
+  },
+  (chat) => ({
+    idxUser: index("idx_chat_user_id").on(chat.userId),
+    idxCreatedAt: index("idx_chat_created_at").on(chat.createdAt),
+  }),
+);
+
+export const message = pgTable(
+  "message",
+  {
+    id: uuid("id").defaultRandom().primaryKey(),
+    chatId: uuid("chat_id")
+      .notNull()
+      .references(() => chat.id, { onDelete: "cascade" }),
+    content: text("content").notNull(),
+    sqlResult: text("sql_result"),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+  },
+  (message) => ({
+    idxChat: index("idx_message_chat_id").on(message.chatId),
+    idxCreatedAt: index("idx_message_created_at").on(message.createdAt),
+  }),
+);
+
+// ---------- RELATIONS ----------
+export const chatRelations = relations(chat, ({ many, one }) => ({
+  user: one(user, { fields: [chat.userId], references: [user.id] }),
+  messages: many(message),
+}));
+
+export const messageRelations = relations(message, ({ one }) => ({
+  chat: one(chat, { fields: [message.chatId], references: [chat.id] }),
+}));
+
+// ---------- EXPORT ----------
+export const schema = {
+  user,
+  session,
+  account,
+  verification,
+  chat,
+  message,
+};
