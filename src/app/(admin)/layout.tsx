@@ -1,11 +1,9 @@
-import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { AppSidebar } from "@/components/admin/app-sidebar";
-import { ChartAreaInteractive } from "@/components/admin/chart-area-interactive";
-import { SectionCards } from "@/components/admin/section-cards";
 import { SiteHeader } from "@/components/admin/site-header";
-import { SidebarInset, SidebarProvider } from "@/components/shadcn-ui/sidebar";
+import { SidebarInset } from "@/components/shadcn-ui/sidebar";
 import { getSession } from "@/lib/get-session";
+import SidebarWrapper from "@/components/providers/sidebar-provider";
+import { cookies } from "next/headers";
 
 export default async function DashboardLayout({
   children,
@@ -14,22 +12,20 @@ export default async function DashboardLayout({
 }) {
   const session = await getSession();
   if (!session) redirect("/sign-in");
+  const user = session?.user;
 
-  if (session.user.role === "user") redirect("/chats");
+  if (user.role === "user") redirect("/chats");
+  const safeUser = {
+    name: user?.name ?? "",
+    email: user?.email ?? "",
+    avatar: user?.image ?? "/assets/pfp.jpg",
+  };
 
   const cookieStore = await cookies();
   const defaultOpen = cookieStore.get("sidebar_state")?.value === "true";
+
   return (
-    <SidebarProvider
-      style={
-        {
-          "--sidebar-width": "calc(var(--spacing) * 72)",
-          "--header-height": "calc(var(--spacing) * 12)",
-        } as React.CSSProperties
-      }
-      defaultOpen={defaultOpen}
-    >
-      <AppSidebar variant="inset" />
+    <SidebarWrapper user={safeUser} defaultOpen={defaultOpen}>
       <SidebarInset>
         <SiteHeader />
         <div className="flex flex-1 flex-col">
@@ -40,6 +36,6 @@ export default async function DashboardLayout({
           </div>
         </div>
       </SidebarInset>
-    </SidebarProvider>
+    </SidebarWrapper>
   );
 }
