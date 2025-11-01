@@ -146,6 +146,7 @@ function SignInForm() {
 
   const loading = form.formState.isSubmitting;
   const lastUsed = authClient.getLastUsedLoginMethod();
+  console.log(lastUsed);
 
   return (
     <Card className="w-full max-w-md">
@@ -225,27 +226,20 @@ function SignInForm() {
             )}
 
             <div className="relative w-full">
-              <div className="relative w-full">
-                <LoadingButton
-                  type="submit"
-                  className="w-full"
-                  loading={loading}
-                >
-                  Login
-                </LoadingButton>
-                {lastUsed === "email" && (
-                  <Badge className="pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 bg-black px-1.5 py-0 text-[10px] text-white opacity-80">
-                    Last used
-                  </Badge>
-                )}
-              </div>
+              <LoadingButton type="submit" className="w-full" loading={loading}>
+                Login
+              </LoadingButton>
+              {lastUsed === "email" && (
+                <Badge className="pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 bg-black px-1.5 py-0 text-[10px] text-white opacity-80">
+                  Last used
+                </Badge>
+              )}
             </div>
-
             <div className="flex w-full flex-col items-center justify-between gap-2">
               <Button
                 type="button"
                 variant="outline"
-                className="w-full gap-2"
+                className="relative w-full gap-2"
                 disabled={loading}
                 onClick={() => handleSocialSignIn({ provider: "google" })}
               >
@@ -261,7 +255,7 @@ function SignInForm() {
               <Button
                 type="button"
                 variant="outline"
-                className="w-full gap-2"
+                className="relative w-full gap-2"
                 disabled={loading}
                 onClick={() => handleSocialSignIn({ provider: "github" })}
               >
