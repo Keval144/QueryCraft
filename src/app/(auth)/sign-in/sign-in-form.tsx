@@ -146,7 +146,7 @@ function SignInForm() {
 
   const loading = form.formState.isSubmitting;
   const lastUsed = authClient.getLastUsedLoginMethod();
-
+  // const lastUsed = "github";
   return (
     <Card className="w-full max-w-md">
       <CardHeader>
@@ -234,41 +234,49 @@ function SignInForm() {
                 </Badge>
               )}
             </div>
-            <div className="flex w-full flex-col items-center justify-between gap-2">
-              <Button
-                type="button"
-                variant="outline"
-                className="relative w-full gap-2"
-                disabled={loading}
-                onClick={() => handleSocialSignIn({ provider: "google" })}
-              >
-                <GoogleIcon width="0.98em" height="1em" />
-                Sign in with Google
-                {lastUsed === "google" && (
-                  <Badge className="pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 bg-black px-1.5 py-0 text-[10px] text-white opacity-80">
-                    Last used
-                  </Badge>
-                )}
-              </Button>
-
-              <Button
-                type="button"
-                variant="outline"
-                className="relative w-full gap-2"
-                disabled={loading}
-                onClick={() => handleSocialSignIn({ provider: "github" })}
-              >
-                <GithubIcon />
-                Sign in with Github
-                {lastUsed === "github" && (
-                  <Badge className="pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 bg-black px-1.5 py-0 text-[10px] text-white opacity-80">
-                    Last used
-                  </Badge>
-                )}
-              </Button>
-            </div>
           </form>
         </FormProvider>
+        <div className="mt-2 flex w-full flex-col items-center justify-between gap-2">
+          {/* Google Login Button */}
+          <Button
+            type="button"
+            variant="outline"
+            className="relative w-full gap-2"
+            disabled={loading}
+            onClick={() => handleSocialSignIn({ provider: "google" })}
+          >
+            <GoogleIcon width="0.98em" height="1em" />
+            Sign in with Google
+            {lastUsed === "google" && (
+              <Badge
+                className="pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 scale-95 bg-black px-1.5 py-0 text-[10px] text-white opacity-80 transition-all duration-200 ease-out data-[show=true]:scale-100"
+                data-show="true"
+              >
+                Last used
+              </Badge>
+            )}
+          </Button>
+
+          {/* GitHub Login Button */}
+          <Button
+            type="button"
+            variant="outline"
+            className="relative w-full gap-2"
+            disabled={loading}
+            onClick={() => handleSocialSignIn({ provider: "github" })}
+          >
+            <GithubIcon />
+            Sign in with Github
+            {lastUsed === "github" && (
+              <Badge
+                className="pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 scale-95 bg-black px-1.5 py-0 text-[10px] text-white opacity-80 transition-all duration-200 ease-out data-[show=true]:scale-100"
+                data-show="true"
+              >
+                Last used
+              </Badge>
+            )}
+          </Button>
+        </div>
       </CardContent>
       <CardFooter>
         <div className="flex w-full justify-center border-t pt-4">
