@@ -34,6 +34,7 @@ import {
 import { Input } from "@/components/shadcn-ui/input";
 import { authClient } from "@/lib/auth-client";
 import { CheckRole } from "@/lib/check-role";
+import { Badge } from "@/components/shadcn-ui/badge";
 
 function SignInForm() {
   const [error, setError] = useState<string | null>(null);
@@ -144,6 +145,7 @@ function SignInForm() {
   }
 
   const loading = form.formState.isSubmitting;
+  const lastUsed = authClient.getLastUsedLoginMethod();
 
   return (
     <Card className="w-full max-w-md">
@@ -222,9 +224,22 @@ function SignInForm() {
               </div>
             )}
 
-            <LoadingButton type="submit" className="w-full" loading={loading}>
-              Login
-            </LoadingButton>
+            <div className="relative w-full">
+              <div className="relative w-full">
+                <LoadingButton
+                  type="submit"
+                  className="w-full"
+                  loading={loading}
+                >
+                  Login
+                </LoadingButton>
+                {lastUsed === "email" && (
+                  <Badge className="pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 bg-black px-1.5 py-0 text-[10px] text-white opacity-80">
+                    Last used
+                  </Badge>
+                )}
+              </div>
+            </div>
 
             <div className="flex w-full flex-col items-center justify-between gap-2">
               <Button
@@ -236,6 +251,11 @@ function SignInForm() {
               >
                 <GoogleIcon width="0.98em" height="1em" />
                 Sign in with Google
+                {lastUsed === "google" && (
+                  <Badge className="pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 bg-black px-1.5 py-0 text-[10px] text-white opacity-80">
+                    Last used
+                  </Badge>
+                )}
               </Button>
 
               <Button
@@ -247,6 +267,11 @@ function SignInForm() {
               >
                 <GithubIcon />
                 Sign in with Github
+                {lastUsed === "github" && (
+                  <Badge className="pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 bg-black px-1.5 py-0 text-[10px] text-white opacity-80">
+                    Last used
+                  </Badge>
+                )}
               </Button>
             </div>
           </form>
