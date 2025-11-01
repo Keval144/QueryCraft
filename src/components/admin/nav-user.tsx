@@ -7,6 +7,7 @@ import {
   IconNotification,
   IconUserCircle,
 } from "@tabler/icons-react";
+import { StaticImageData } from "next/image";
 import { useRouter } from "next/navigation";
 import {
   Avatar,
@@ -29,7 +30,6 @@ import {
   useSidebar,
 } from "@/components/shadcn-ui/sidebar";
 import { authClient } from "@/lib/auth-client";
-import { StaticImageData } from "next/image";
 
 export function NavUser({
   user,

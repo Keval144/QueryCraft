@@ -1,6 +1,15 @@
+import { redirect } from "next/navigation";
 import { AppNavbar } from "@/components/common/app-navbar";
+import { getSession } from "@/lib/get-session";
 
-function Page() {
+async function Page() {
+  const session = await getSession();
+
+  const user = session?.user;
+
+  if (user?.role === "user") redirect("/chats");
+  if (user?.role === "admin") redirect("/dashboard");
+
   return (
     <div className="relative w-full">
       {/* only one screen height worth of gradient */}

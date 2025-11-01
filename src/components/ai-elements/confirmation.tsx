@@ -1,8 +1,5 @@
 "use client";
 
-import { Alert, AlertDescription } from "@/components/shadcn-ui/alert";
-import { Button } from "@/components/shadcn-ui/button";
-import { cn } from "@/lib/utils";
 import type { ToolUIPart } from "ai";
 import {
   type ComponentProps,
@@ -10,6 +7,9 @@ import {
   type ReactNode,
   useContext,
 } from "react";
+import { Alert, AlertDescription } from "@/components/shadcn-ui/alert";
+import { Button } from "@/components/shadcn-ui/button";
+import { cn } from "@/lib/utils";
 
 type ConfirmationContextValue = {
   approval?: any;

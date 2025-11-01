@@ -1,13 +1,6 @@
 "use client";
 
 import { useControllableState } from "@radix-ui/react-use-controllable-state";
-import { Badge } from "@/components/shadcn-ui/badge";
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/shadcn-ui/collapsible";
-import { cn } from "@/lib/utils";
 import {
   BrainIcon,
   ChevronDownIcon,
@@ -16,6 +9,13 @@ import {
 } from "lucide-react";
 import type { ComponentProps } from "react";
 import { createContext, memo, useContext, useMemo } from "react";
+import { Badge } from "@/components/shadcn-ui/badge";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/shadcn-ui/collapsible";
+import { cn } from "@/lib/utils";
 
 type ChainOfThoughtContextValue = {
   isOpen: boolean;

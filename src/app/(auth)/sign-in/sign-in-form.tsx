@@ -14,6 +14,7 @@ import z from "zod";
 import { LoadingButton } from "@/components/auth/loading-button";
 import { PasswordInput } from "@/components/auth/password-input";
 import QueryNex from "@/components/common/querynex";
+import { Badge } from "@/components/shadcn-ui/badge";
 import { Button } from "@/components/shadcn-ui/button";
 import {
   Card,
@@ -34,7 +35,6 @@ import {
 import { Input } from "@/components/shadcn-ui/input";
 import { authClient } from "@/lib/auth-client";
 import { CheckRole } from "@/lib/check-role";
-import { Badge } from "@/components/shadcn-ui/badge";
 
 function SignInForm() {
   const [error, setError] = useState<string | null>(null);
@@ -146,7 +146,6 @@ function SignInForm() {
 
   const loading = form.formState.isSubmitting;
   const lastUsed = authClient.getLastUsedLoginMethod();
-  // const lastUsed = "github";
   return (
     <Card className="w-full max-w-md">
       <CardHeader>

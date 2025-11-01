@@ -1,16 +1,18 @@
 "use client";
-import {
-  Navbar,
-  NavBody,
-  NavItems,
-  MobileNav,
-  NavbarLogo,
-  NavbarButton,
-  MobileNavHeader,
-  MobileNavToggle,
-  MobileNavMenu,
-} from "./navbar";
+import Link from "next/link";
 import { useState } from "react";
+import { Button } from "../shadcn-ui/button";
+import {
+  MobileNav,
+  MobileNavHeader,
+  MobileNavMenu,
+  MobileNavToggle,
+  NavBody,
+  Navbar,
+  NavbarButton,
+  NavbarLogo,
+  NavItems,
+} from "./navbar";
 import { ThemeSwitch } from "./theme-switch";
 
 export function AppNavbar() {
@@ -37,9 +39,9 @@ export function AppNavbar() {
       <NavBody>
         <NavbarLogo />
         <NavItems items={navItems} />
-        <div className="flex items-center">
-          <NavbarButton variant="secondary">Login</NavbarButton>
-          <NavbarButton variant="primary">Book a call</NavbarButton>
+        <div className="z-10 flex items-center gap-4">
+          <Link href={"/sign-in"}>Login </Link>
+          <Link href={"/sign-up"}>Sign up</Link>
         </div>
       </NavBody>
 
@@ -50,7 +52,6 @@ export function AppNavbar() {
           <MobileNavToggle
             isOpen={isMobileMenuOpen}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            
           />
         </MobileNavHeader>
 
@@ -69,19 +70,11 @@ export function AppNavbar() {
             </a>
           ))}
           <div className="flex w-full flex-col gap-4">
-            <NavbarButton
-              onClick={() => setIsMobileMenuOpen(false)}
-              variant="primary"
-              className="w-full"
-            >
+            <NavbarButton href="/sign-in" variant="primary" className="w-full">
               Login
             </NavbarButton>
-            <NavbarButton
-              onClick={() => setIsMobileMenuOpen(false)}
-              variant="primary"
-              className="w-full"
-            >
-              Book a call
+            <NavbarButton href="sign-up" variant="primary" className="w-full">
+              Sign up
             </NavbarButton>
             <ThemeSwitch />
           </div>

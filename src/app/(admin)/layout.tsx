@@ -1,9 +1,9 @@
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { SiteHeader } from "@/components/admin/site-header";
+import SidebarWrapper from "@/components/providers/sidebar-provider";
 import { SidebarInset } from "@/components/shadcn-ui/sidebar";
 import { getSession } from "@/lib/get-session";
-import SidebarWrapper from "@/components/providers/sidebar-provider";
-import { cookies } from "next/headers";
 
 export default async function DashboardLayout({
   children,

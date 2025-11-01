@@ -1,5 +1,8 @@
 "use client";
 
+import { ChevronsUpDownIcon } from "lucide-react";
+import type { ComponentProps } from "react";
+import { createContext, useContext } from "react";
 import { Button } from "@/components/shadcn-ui/button";
 import {
   Card,
@@ -16,9 +19,6 @@ import {
   CollapsibleTrigger,
 } from "@/components/shadcn-ui/collapsible";
 import { cn } from "@/lib/utils";
-import { ChevronsUpDownIcon } from "lucide-react";
-import type { ComponentProps } from "react";
-import { createContext, useContext } from "react";
 import { Shimmer } from "./shimmer";
 
 type PlanContextValue = {

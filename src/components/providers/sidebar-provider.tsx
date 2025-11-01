@@ -1,6 +1,6 @@
 "use client";
-import { SidebarProvider } from "../shadcn-ui/sidebar";
 import { AppSidebar } from "../admin/app-sidebar";
+import { SidebarProvider } from "../shadcn-ui/sidebar";
 
 export default function SidebarWrapperClient({
   children,
