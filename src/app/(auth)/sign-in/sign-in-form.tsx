@@ -146,7 +146,6 @@ function SignInForm() {
 
   const loading = form.formState.isSubmitting;
   const lastUsed = authClient.getLastUsedLoginMethod();
-  console.log(lastUsed);
 
   return (
     <Card className="w-full max-w-md">
