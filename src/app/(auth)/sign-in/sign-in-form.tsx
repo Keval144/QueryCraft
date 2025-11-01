@@ -97,12 +97,49 @@ function SignInForm() {
     );
   }
 
-  function handleSocialSignIn({ provider }: { provider: "Google" | "Github" }) {
-    switch (provider) {
-      case "Google":
-        break;
-      case "Github":
-        break;
+  async function handleSocialSignIn({
+    provider,
+  }: {
+    provider: "google" | "github";
+  }) {
+    try {
+      setError(null);
+
+      await authClient.signIn.social(
+        { provider },
+        {
+          onSuccess: async () => {
+            try {
+              const role = await CheckRole();
+
+              if (!role) {
+                toast.error("User role not found!");
+                return router.push("/sign-in");
+              }
+
+              if (role === "admin") {
+                toast.success("Welcome back, Admin!");
+                router.push("/dashboard");
+              } else if (role === "user") {
+                toast.success("Welcome back!");
+                router.push("/chats");
+              } else {
+                router.push("/");
+              }
+            } catch (err) {
+              console.error("Error fetching session:", err);
+              toast.error("Something went wrong while checking role.");
+            }
+          },
+          onError: (ctx) => {
+            setError(ctx.error.message || "Something went wrong");
+            toast.error(ctx.error.message || "Oops! Something went wrong!");
+          },
+        },
+      );
+    } catch (err: any) {
+      console.error(err);
+      toast.error(err.message || "Unexpected error during sign-in.");
     }
   }
 
@@ -195,7 +232,7 @@ function SignInForm() {
                 variant="outline"
                 className="w-full gap-2"
                 disabled={loading}
-                onClick={() => handleSocialSignIn({ provider: "Google" })}
+                onClick={() => handleSocialSignIn({ provider: "google" })}
               >
                 <GoogleIcon width="0.98em" height="1em" />
                 Sign in with Google
@@ -206,7 +243,7 @@ function SignInForm() {
                 variant="outline"
                 className="w-full gap-2"
                 disabled={loading}
-                onClick={() => handleSocialSignIn({ provider: "Github" })}
+                onClick={() => handleSocialSignIn({ provider: "github" })}
               >
                 <GithubIcon />
                 Sign in with Github
